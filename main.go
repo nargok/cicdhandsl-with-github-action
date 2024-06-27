@@ -14,6 +14,6 @@ func main() {
   })
 }
 
-func makeGreeting(name String) String {
+func makeGreeting(name string) String {
   return fmt.Sprintf("Hello, %d", name)
 }
