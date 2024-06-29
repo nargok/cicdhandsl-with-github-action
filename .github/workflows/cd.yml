@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Container Registeryに認証する
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghrc.io -u ${{ github.actor }} --passwrod-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghrc.io -u ${{ github.actor }} --password-stdin
       - name: Dockerビルドを実行
         run: docker build -t ghrc.io/${{ github.repository }}:latest
       - name: Dockerイメージをプッシュする
