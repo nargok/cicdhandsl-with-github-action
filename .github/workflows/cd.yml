@@ -1,0 +1,22 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cd:
+    name: cd
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Container Registeryに認証する
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghrc.io -u ${{ github.actor }} --passwrod-stdin
+      - name: Dockerビルドを実行
+        run: docker build -t ghrc.io/${{ github.repository }}:latest
+      - name: Dockerイメージをプッシュする
+        run: docker push ghrc.io/${{ github.repository }}:latest
